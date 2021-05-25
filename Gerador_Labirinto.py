@@ -1,14 +1,45 @@
+from math import floor
 import random
+
+def AjustarLabirinto(labirinto, altura, largura):
+    paredes_por_linha = []
+    for i in range(0, altura):
+        contador = 0
+        for j in range(0, largura):
+            if labirinto[i][j] == 'w':
+                contador += 1
+        paredes_por_linha.append(contador)
+    paredes_por_coluna = []
+    for i in range(0, largura):
+        contador = 0
+        for j in range(0, altura):
+            if labirinto[j][i] == 'w':
+                contador += 1
+        paredes_por_coluna.append(contador)
+    a_remover_linha = sorted(paredes_por_linha)
+    a_remover_coluna = sorted(paredes_por_coluna)
+    del a_remover_linha[-floor(altura/2):]
+    del a_remover_coluna[-floor(largura/2):]
+    for linha in range(1, altura):
+        if paredes_por_linha[linha] in a_remover_linha and paredes_por_linha[linha-1] not in a_remover_linha:
+            for coluna in range(0, largura):
+                if coluna != 0 and coluna != largura-1:
+                    labirinto[linha][coluna] = 'c'
+    for coluna in range(1, coluna):
+        if paredes_por_coluna[coluna] in a_remover_coluna and paredes_por_coluna[coluna-1] not in a_remover_coluna:
+            for linha in range(0, altura):
+                if linha != 0 and linha != altura-1:
+                    labirinto[linha][coluna] = 'c'
 
 def printlabirinto(labirinto, altura, largura):
 	for i in range(0, altura):
 		for j in range(0, largura):
 			if (labirinto[i][j] == 'u'):
-				print('\033[0m' + str(labirinto[i][j]), end=" ")
+				print('\033[0m' + str(labirinto[i][j]) + " ", end=" ")
 			elif (labirinto[i][j] == 'c'):
-				print('\033[92m' + str(labirinto[i][j]), end=" ")
+				print('\033[92m' + str(labirinto[i][j]) + " ", end=" ")
 			else:
-				print('\033[91m' + str(labirinto[i][j]), end=" ")
+				print('\033[91m' + str(labirinto[i][j]) + " ", end=" ")
 		print('\n')
 
 def VaziosEmVolta(rand_parede, labirinto):
@@ -162,5 +193,6 @@ def GerarLabirinto(altura, largura, labirinto=[], parede='w', vazio='c', unvisit
         if (labirinto[altura-2][i] == 'c'):
             labirinto[altura-1][i] = 'c'
             break
+    AjustarLabirinto(labirinto, altura, largura)
     printlabirinto(labirinto, altura, largura)
     return labirinto
