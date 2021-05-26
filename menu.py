@@ -22,6 +22,9 @@ while state != "QUIT":
     pygame.display.update()
     pygame.time.wait(100)
     if state == "INIT":
+        for event in pygame.event.get():
+            if event.type == pygame.KEYDOWN:
+                state = "GAME"
         if render_img1 == True:
             render_img1 = False
             window.blit(IMG2, (0,0))
