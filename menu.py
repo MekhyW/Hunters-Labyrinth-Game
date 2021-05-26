@@ -3,7 +3,7 @@ import pygame
 pygame.init()
 
 #Imagens do menu
-window = pygame.display.set_mode((1000,800))
+window = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
 
 pygame.display.set_caption('Hunters')
 
@@ -13,8 +13,8 @@ fig2 = pygame.image.load("Graficos/fig2.jpg")
 
 # Tela de inicialização 
 
-IMG1 = pygame.transform.scale(fig1, (1000, 800))
-IMG2 = pygame.transform.scale(fig2, (1000, 800))
+IMG1 = pygame.transform.scale(fig1, (1366, 768))
+IMG2 = pygame.transform.scale(fig2, (1366, 768))
 
 render_img1 = True
 state = "INIT"
