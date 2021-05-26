@@ -18,8 +18,8 @@ def AjustarLabirinto(labirinto, altura, largura):
         paredes_por_coluna.append(contador)
     a_remover_linha = sorted(paredes_por_linha)
     a_remover_coluna = sorted(paredes_por_coluna)
-    del a_remover_linha[-floor(altura/2):]
-    del a_remover_coluna[-floor(largura/2):]
+    del a_remover_linha[-floor(altura/1.2):]
+    del a_remover_coluna[-floor(largura/1.2):]
     for linha in range(1, altura):
         if paredes_por_linha[linha] in a_remover_linha and paredes_por_linha[linha-1] not in a_remover_linha:
             for coluna in range(0, largura):
