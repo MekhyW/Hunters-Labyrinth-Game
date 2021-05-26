@@ -32,6 +32,6 @@ while state != "QUIT":
             render_img1 = True
             window.blit(IMG1, (0,0))
     elif state == "GAME":
-        render_img1 = False
+        break
     else:         
         state = "QUIT"
