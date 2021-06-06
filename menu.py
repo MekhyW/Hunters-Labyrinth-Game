@@ -3,7 +3,7 @@ import pygame
 pygame.init()
 
 #Imagens do menu
-window = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
+window = pygame.display.set_mode((1000,800))
 
 pygame.display.set_caption('Hunters')
 
@@ -13,14 +13,14 @@ fig2 = pygame.image.load("Graficos/fig2.jpg")
 
 # Tela de inicialização 
 
-IMG1 = pygame.transform.scale(fig1, (1366, 768))
-IMG2 = pygame.transform.scale(fig2, (1366, 768))
+IMG1 = pygame.transform.scale(fig1, (1000, 800))
+IMG2 = pygame.transform.scale(fig2, (1000, 800))
 
 render_img1 = True
 state = "INIT"
 while state != "QUIT":
     pygame.display.update()
-    pygame.time.wait(100)
+    pygame.time.wait(1000)
     if state == "INIT":
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
@@ -32,6 +32,6 @@ while state != "QUIT":
             render_img1 = True
             window.blit(IMG1, (0,0))
     elif state == "GAME":
-        break
+        render_img1 = False
     else:         
         state = "QUIT"
