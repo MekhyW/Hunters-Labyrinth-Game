@@ -1,7 +1,10 @@
 from math import floor
 import random
+import time
 
 def AjustarLabirinto(labirinto, altura, largura):
+    labirinto[0][1] = 'c'
+    labirinto[altura-1][largura-2] = 'c'
     paredes_por_linha = []
     for i in range(0, altura):
         contador = 0
@@ -55,6 +58,7 @@ def VaziosEmVolta(rand_parede, labirinto):
 	return s_vazios
 
 def GerarLabirinto(altura, largura, labirinto=[], parede='w', vazio='c', unvisited='u'):
+    labirinto = []
     for i in range(0, altura):
         line = []
         for j in range(0, largura):

@@ -3,20 +3,16 @@ import pygame
 pygame.init()
 
 #Imagens do menu
-window = pygame.display.set_mode((1000,800))
+window = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
 
 pygame.display.set_caption('Hunters')
 
-fig1 = pygame.image.load("Graficos/fig1.jpg")
-fig2 = pygame.image.load("Graficos/fig2.jpg")
-fig3 = pygame.image.load("Graficos/menu.png")
+IMG1 = pygame.transform.scale(pygame.image.load("Graficos/fig1.jpg"), (pygame.display.get_surface().get_size()[0], pygame.display.get_surface().get_size()[1]))
+IMG2 = pygame.transform.scale(pygame.image.load("Graficos/fig2.jpg"), (pygame.display.get_surface().get_size()[0], pygame.display.get_surface().get_size()[1]))
+IMG3 = pygame.transform.scale(pygame.image.load("Graficos/menu.png"), (pygame.display.get_surface().get_size()[0], pygame.display.get_surface().get_size()[1]))
 
 
 # Tela de inicialização 
-
-IMG1 = pygame.transform.scale(fig1, (1000, 800))
-IMG2 = pygame.transform.scale(fig2, (1000, 800))
-IMG3 = pygame.transform.scale(fig3, (1000, 800))
 
 render_img1 = True
 render_img3 = True
@@ -41,15 +37,16 @@ while state != "QUIT":
     if i == 1: 
         window.blit(IMG3, (0,0))
     if i >= 2:
-        state == "GAME"
-        state == "QUIT"
+        state = "GAME"
+        import Jogo
+        state = "QUIT"
         break
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN:
             state = "INFORMATIVO"
             i+=1
         if event.type == pygame.QUIT:
-            state == "QUIT"
+            state = "QUIT"
             break
     pygame.display.update()
 pygame.quit() 
