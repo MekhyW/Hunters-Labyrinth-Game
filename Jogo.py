@@ -9,8 +9,10 @@ window = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
 pygame.display.set_caption('Hunters')
 imagewall = pygame.image.load(os.path.join("Graficos/imagewall.png"))
 imagecell = pygame.image.load(os.path.join("Graficos/imagecell.png"))
+imagedark = pygame.image.load(os.path.join("Graficos/imagedark.png"))
 imagewall.convert()
 imagecell.convert()
+imagedark.convert()
 
 class Maze():
     def __init__(self, labirinto):
@@ -28,6 +30,8 @@ class Maze():
                 elif self.labirinto[linha][coluna] == 'w':
                     window.blit(imagewall, (x, y))
                     self.wallcenters.append([x+15, y+15])
+                if math.sqrt(((Player1.x+(Player1.largura/2))-(x+15+15))**2 + ((Player1.y+(Player1.altura/2))-(y+15))**2) > 100 and math.sqrt(((Player2.x+(Player2.largura/2))-(x+15+15))**2 + ((Player2.y+(Player2.altura/2))-(y+15))**2) > 100:
+                    window.blit(imagedark, (x, y)) 
                 x += 30
             y += 30
     
@@ -133,7 +137,6 @@ for i in range(6):
     Labirinto = Maze(Gerador_Labirinto.GerarLabirinto(tamanho_labirinto_y, tamanho_labirinto_x))
     tempo_inicial_partida = pygame.time.get_ticks()/1000
     while True:
-        window.fill((255, 255, 255))
         Labirinto.draw()
         Centro.draw()
         Player1.draw()
