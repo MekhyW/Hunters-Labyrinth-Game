@@ -61,8 +61,10 @@ class Player():
             self.velocity = 1.5
         else:
             self.velocity = 1
+        canmove = 1
         if dirn == 0:
-            canmove = 1
+            if self.is_hunter == True and math.sqrt((((self.x+self.largura+2)-(Centro.x+(Centro.largura/2)))**2) + (((self.y+(self.altura/2))-(Centro.y+(Centro.altura/2)))**2)) <= 50:
+                canmove = 0
             for wallcenter in Labirinto.wallcenters:
                 if math.sqrt((((self.x+self.largura+2)-wallcenter[0])**2) + (((self.y+(self.altura/2))-wallcenter[1])**2)) <= 22:
                     canmove = 0
@@ -70,7 +72,8 @@ class Player():
             if canmove == 1:
                 self.x += self.velocity
         elif dirn == 1:
-            canmove = 1
+            if self.is_hunter == True and math.sqrt((((self.x-2)-(Centro.x+(Centro.largura/2)))**2) + (((self.y+(self.altura/2))-(Centro.y+(Centro.altura/2)))**2)) <= 50:
+                canmove = 0
             for wallcenter in Labirinto.wallcenters:
                 if math.sqrt((((self.x-2)-wallcenter[0])**2) + (((self.y+(self.altura/2))-wallcenter[1])**2)) <= 22:
                     canmove = 0
@@ -78,7 +81,8 @@ class Player():
             if canmove == 1:
                 self.x -= self.velocity
         elif dirn == 2:
-            canmove = 1
+            if self.is_hunter == True and math.sqrt((((self.x+(self.largura/2))-(Centro.x+(Centro.largura/2)))**2) + (((self.y-2)-(Centro.y+(Centro.altura/2)))**2)) <= 50:
+                canmove = 0
             for wallcenter in Labirinto.wallcenters:
                 if math.sqrt((((self.x+(self.largura/2))-wallcenter[0])**2) + (((self.y-2)-wallcenter[1])**2)) <= 22:
                     canmove = 0
@@ -86,7 +90,8 @@ class Player():
             if canmove == 1:
                 self.y -= self.velocity
         else:
-            canmove = 1
+            if self.is_hunter == True and math.sqrt((((self.x+(self.largura/2))-(Centro.x+(Centro.largura/2)))**2) + (((self.y+self.altura+2)-(Centro.y+(Centro.altura/2)))**2)) <= 50:
+                canmove = 0
             for wallcenter in Labirinto.wallcenters:
                 if math.sqrt((((self.x+(self.largura/2))-wallcenter[0])**2) + (((self.y+self.altura+2)-wallcenter[1])**2)) <= 22:
                     canmove = 0
@@ -165,3 +170,8 @@ for i in range(6):
         window.blit(textsurface, (pygame.display.get_surface().get_size()[0]/2, 0))
         pygame.time.wait(10)
         pygame.display.update()
+from passa_de_fase_e_vitoria import *
+if sum(tempos_player1) <= sum(tempos_player2):
+    vencedor(0)
+else:
+    vencedor(1)

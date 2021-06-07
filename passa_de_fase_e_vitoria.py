@@ -3,19 +3,14 @@ import pygame
 pygame.init()
 
 #mostrar quem venceu 
-window = pygame.display.set_mode((1000, 800))
+window = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
 
 pygame.display.set_caption('Hunters')
 
-fig4 = pygame.image.load("Graficos/player_1v.jpg")
-fig5 = pygame.image.load("Graficos/player_1.jpg")
-fig6 = pygame.image.load("Graficos/player_2v.jpg")
-fig7 = pygame.image.load("Graficos/player_2.jpg")
-
-IMG4 = pygame.transform.scale(fig4, (1000, 800))
-IMG5 = pygame.transform.scale(fig5, (1000, 800))
-IMG6 = pygame.transform.scale(fig6, (1000, 800))
-IMG7 = pygame.transform.scale(fig7, (1000, 800))
+IMG4 = pygame.image.load("Graficos/player_1v.jpg")
+IMG5 = pygame.image.load("Graficos/player_1.jpg")
+IMG6 = pygame.image.load("Graficos/player_2v.jpg")
+IMG7 = pygame.image.load("Graficos/player_2.jpg")
 
 def vencedor(player): 
     if player == 0:
@@ -28,15 +23,13 @@ def vencedor(player):
             if state == "INIT":
                 for event in pygame.event.get():
                     if event.type == pygame.KEYDOWN: 
-                        state = "GAME"
+                        state = "QUIT"
                 if render_img4 == True: 
-                    render_imag4 = False
+                    render_img4 = False
                     window.blit(IMG5, (0,0))
                 else:
                     render_img4 = True 
                     window.blit(IMG4, (0,0))
-            elif state == "GAME":
-                render_img4 = False 
             else: 
                 state = "QUIT"
     else: 
@@ -49,19 +42,12 @@ def vencedor(player):
             if state == "INIT":
                 for event in pygame.event.get():
                     if event.type == pygame.KEYDOWN: 
-                        state = "GAME"
+                        state = "QUIT"
                 if render_img6 == True: 
-                    render_imag6 = False
+                    render_img6 = False
                     window.blit(IMG7, (0,0))
                 else:
-                    render_img4 = True 
-                    window.blit(IMG6, (0,0))
-            elif state == "GAME":
-                render_img6 = False 
+                    render_img6 = True 
+                    window.blit(IMG6, (0,0)) 
             else: 
                 state = "QUIT"
-vencedor(0)
-
-    
-         
-               
