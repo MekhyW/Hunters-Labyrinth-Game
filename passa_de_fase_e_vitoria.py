@@ -51,3 +51,4 @@ def vencedor(player):
                     window.blit(IMG6, (0,0)) 
             else: 
                 state = "QUIT"
+vencedor(0)
