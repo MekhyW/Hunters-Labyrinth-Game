@@ -1,6 +1,7 @@
 import pygame
-
+import Sounds
 pygame.init()
+Sounds.Musica('victory')
 
 #mostrar quem venceu 
 window = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
@@ -51,4 +52,3 @@ def vencedor(player):
                     window.blit(IMG6, (0,0)) 
             else: 
                 state = "QUIT"
-vencedor(0)

@@ -1,6 +1,7 @@
 import pygame
-
+import Sounds
 pygame.init()
+Sounds.Musica('menu')
 
 #Imagens do menu
 window = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
