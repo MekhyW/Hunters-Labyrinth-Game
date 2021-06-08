@@ -4,9 +4,7 @@ window = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
 
 pygame.display.set_caption('Hunters')
 
-
-
-IMG8 = pygame.image.load("Graficos/muda_jogador.jpeg")
+IMG8 = pygame.image.load("Graficos/muda.jpeg")
 render_img8 = True
 state = "INIT"
 i = 0
