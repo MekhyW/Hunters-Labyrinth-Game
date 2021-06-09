@@ -9,6 +9,7 @@ pygame.font.init()
 myfont = pygame.font.SysFont('Comic Sans MS', 20)
 window = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
 pygame.display.set_caption('Hunters')
+mudajogador = pygame.image.load(os.path.join("Graficos/muda.jpeg"))
 imagewall = pygame.image.load(os.path.join("Graficos/imagewall.png"))
 imagecell = pygame.image.load(os.path.join("Graficos/imagecell.png"))
 imagedark = pygame.image.load(os.path.join("Graficos/imagedark.png"))
@@ -231,6 +232,10 @@ for i in range(6):
     elif i == 3:
         Sounds.Musica('partida2')
     Labirinto = Maze(Gerador_Labirinto.GerarLabirinto(tamanho_labirinto_y, tamanho_labirinto_x))
+    if i != 0:
+        window.blit(mudajogador, (0, 0))
+        pygame.display.update()
+        pygame.time.delay(2000)
     tempo_inicial_partida = pygame.time.get_ticks()/1000
     while True:
         Labirinto.draw()
