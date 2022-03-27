@@ -240,7 +240,7 @@ for i in range(6):
         Sounds.Musica('partida')
     elif i == 3:
         Sounds.Musica('partida2')
-    Labirinto = Maze(Gerador_Labirinto.GerarLabirinto(tamanho_labirinto_y, tamanho_labirinto_x))
+    Labirinto = Maze(Gerador_Labirinto.GerarAjustarPrintarLabirinto(tamanho_labirinto_y, tamanho_labirinto_x))
     if i != 0:
         window.blit(mudajogador, (0, 0))
         pygame.display.update()

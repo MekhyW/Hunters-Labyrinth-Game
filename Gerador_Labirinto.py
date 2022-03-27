@@ -56,13 +56,13 @@ def VaziosEmVolta(rand_parede, labirinto):
 		s_vazios += 1
 	return s_vazios
 
-def GerarLabirinto(altura, largura, labirinto=[], parede='w', vazio='c', unvisited='u'):
-    labirinto = []
+def GerarLabirintoVazio(altura, largura, parede='w', vazio='c', unvisited='u'):
+    labirinto_vazio = []
     for i in range(0, altura):
         line = []
         for j in range(0, largura):
             line.append(unvisited)
-        labirinto.append(line)
+        labirinto_vazio.append(line)
     starting_altura = int(random.random()*altura)
     starting_largura = int(random.random()*largura)
     if (starting_altura == 0):
@@ -73,16 +73,21 @@ def GerarLabirinto(altura, largura, labirinto=[], parede='w', vazio='c', unvisit
         starting_largura += 1
     if (starting_largura == largura-1):
         starting_largura -= 1
-    labirinto[starting_altura][starting_largura] = vazio
+    labirinto_vazio[starting_altura][starting_largura] = vazio
     paredes = []
     paredes.append([starting_altura - 1, starting_largura])
     paredes.append([starting_altura, starting_largura - 1])
     paredes.append([starting_altura, starting_largura + 1])
     paredes.append([starting_altura + 1, starting_largura])
-    labirinto[starting_altura-1][starting_largura] = 'w'
-    labirinto[starting_altura][starting_largura - 1] = 'w'
-    labirinto[starting_altura][starting_largura + 1] = 'w'
-    labirinto[starting_altura + 1][starting_largura] = 'w'
+    labirinto_vazio[starting_altura-1][starting_largura] = parede
+    labirinto_vazio[starting_altura][starting_largura - 1] = parede
+    labirinto_vazio[starting_altura][starting_largura + 1] = parede
+    labirinto_vazio[starting_altura + 1][starting_largura] = parede
+    return labirinto_vazio, paredes
+
+
+def GerarLabirinto(altura, largura, labirinto=[], parede='w', vazio='c', unvisited='u'):
+    labirinto, paredes = GerarLabirintoVazio(altura, largura, labirinto, parede, vazio, unvisited)
     while (paredes):
         rand_parede = paredes[int(random.random()*len(paredes))-1]
         if (rand_parede[1] != 0):
@@ -196,6 +201,10 @@ def GerarLabirinto(altura, largura, labirinto=[], parede='w', vazio='c', unvisit
         if (labirinto[altura-2][i] == 'c'):
             labirinto[altura-1][i] = 'c'
             break
+    return labirinto
+
+def GerarAjustarPrintarLabirinto(altura, largura):
+    labirinto = GerarLabirinto(altura, largura)
     AjustarLabirinto(labirinto, altura, largura)
     printlabirinto(labirinto, altura, largura)
     return labirinto
