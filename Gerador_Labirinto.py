@@ -87,7 +87,7 @@ def GerarLabirintoVazio(altura, largura, parede='w', vazio='c', unvisited='u'):
 
 
 def GerarLabirinto(altura, largura, labirinto=[], parede='w', vazio='c', unvisited='u'):
-    labirinto, paredes = GerarLabirintoVazio(altura, largura, labirinto, parede, vazio, unvisited)
+    labirinto, paredes = GerarLabirintoVazio(altura, largura)
     while (paredes):
         rand_parede = paredes[int(random.random()*len(paredes))-1]
         if (rand_parede[1] != 0):
