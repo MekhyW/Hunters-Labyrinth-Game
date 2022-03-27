@@ -56,12 +56,12 @@ def VaziosEmVolta(rand_parede, labirinto):
 		s_vazios += 1
 	return s_vazios
 
-def GerarLabirintoVazio(altura, largura, parede='w', vazio='c', unvisited='u'):
+def GerarLabirintoVazio(altura, largura):
     labirinto_vazio = []
     for i in range(0, altura):
         line = []
         for j in range(0, largura):
-            line.append(unvisited)
+            line.append('u')
         labirinto_vazio.append(line)
     starting_altura = int(random.random()*altura)
     starting_largura = int(random.random()*largura)
@@ -73,20 +73,20 @@ def GerarLabirintoVazio(altura, largura, parede='w', vazio='c', unvisited='u'):
         starting_largura += 1
     if (starting_largura == largura-1):
         starting_largura -= 1
-    labirinto_vazio[starting_altura][starting_largura] = vazio
+    labirinto_vazio[starting_altura][starting_largura] = 'c'
     paredes = []
     paredes.append([starting_altura - 1, starting_largura])
     paredes.append([starting_altura, starting_largura - 1])
     paredes.append([starting_altura, starting_largura + 1])
     paredes.append([starting_altura + 1, starting_largura])
-    labirinto_vazio[starting_altura-1][starting_largura] = parede
-    labirinto_vazio[starting_altura][starting_largura - 1] = parede
-    labirinto_vazio[starting_altura][starting_largura + 1] = parede
-    labirinto_vazio[starting_altura + 1][starting_largura] = parede
+    labirinto_vazio[starting_altura-1][starting_largura] = 'w'
+    labirinto_vazio[starting_altura][starting_largura - 1] = 'w'
+    labirinto_vazio[starting_altura][starting_largura + 1] = 'w'
+    labirinto_vazio[starting_altura + 1][starting_largura] = 'w'
     return labirinto_vazio, paredes
 
 
-def GerarLabirinto(altura, largura, labirinto=[], parede='w', vazio='c', unvisited='u'):
+def GerarLabirinto(altura, largura):
     labirinto, paredes = GerarLabirintoVazio(altura, largura)
     while (paredes):
         rand_parede = paredes[int(random.random()*len(paredes))-1]
