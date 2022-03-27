@@ -18,9 +18,9 @@ IMG3 = pygame.transform.scale(pygame.image.load("Graficos/menu.png"), (pygame.di
 render_img1 = True
 render_img3 = True
 state = "INIT"
-i = 0
+telaJogo = 0
 while state != "QUIT":
-    if i <= 0:
+    if telaJogo <= 0:
         pygame.display.update()
         pygame.time.wait(600)
         if state == "INIT":
@@ -35,9 +35,9 @@ while state != "QUIT":
             render_img1 = False
         else:         
             state = "QUIT"
-    if i == 1: 
+    if telaJogo == 1: 
         window.blit(IMG3, (0,0))
-    if i >= 2:
+    if telaJogo >= 2:
         state = "GAME"
         import Jogo
         state = "QUIT"
@@ -45,20 +45,9 @@ while state != "QUIT":
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN:
             state = "INFORMATIVO"
-            i+=1
+            telaJogo+=1
         if event.type == pygame.QUIT:
             state = "QUIT"
             break
     pygame.display.update()
 pygame.quit() 
-    
-        
-
-
-
-
-
-
-
-
-
