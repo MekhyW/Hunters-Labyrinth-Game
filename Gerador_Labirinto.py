@@ -1,6 +1,5 @@
 from math import floor
 import random
-import time
 
 def AjustarLabirinto(labirinto, altura, largura):
     labirinto[0][1] = 'c'
