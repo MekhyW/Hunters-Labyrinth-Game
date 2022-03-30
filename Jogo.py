@@ -137,6 +137,48 @@ class Player():
             sprites = self.sprites_hunter_frente
         window.blit(sprites[self.current_sprite], (self.x-10, self.y-10))
         #pygame.draw.rect(window, self.cor ,(self.x, self.y, self.largura, self.altura), 0)
+
+    def moveDireita(self,canmove):
+        if self.is_hunter == True and math.sqrt((((self.x+self.largura+2)-(Centro.x+(Centro.largura/2)))**2) + (((self.y+(self.altura/2))-(Centro.y+(Centro.altura/2)))**2)) <= 50:
+            canmove = 0
+        for wallcenter in Labirinto.wallcenters:
+            if math.sqrt((((self.x+self.largura+2)-wallcenter[0])**2) + (((self.y+(self.altura/2))-wallcenter[1])**2)) <= 22:
+                canmove = 0
+                break
+        if canmove == 1:
+            self.x += self.velocity
+            self.direction = 0
+    def moveEsquerda(self,canmove):
+        if self.is_hunter == True and math.sqrt((((self.x-2)-(Centro.x+(Centro.largura/2)))**2) + (((self.y+(self.altura/2))-(Centro.y+(Centro.altura/2)))**2)) <= 50:
+            canmove = 0
+        for wallcenter in Labirinto.wallcenters:
+            if math.sqrt((((self.x-2)-wallcenter[0])**2) + (((self.y+(self.altura/2))-wallcenter[1])**2)) <= 22:
+                canmove = 0
+                break
+        if canmove == 1:
+            self.x -= self.velocity
+            self.direction = 1
+    def moveCima(self,canmove):
+        if self.is_hunter == True and math.sqrt((((self.x+(self.largura/2))-(Centro.x+(Centro.largura/2)))**2) + (((self.y-2)-(Centro.y+(Centro.altura/2)))**2)) <= 50:
+            canmove = 0
+        for wallcenter in Labirinto.wallcenters:
+            if math.sqrt((((self.x+(self.largura/2))-wallcenter[0])**2) + (((self.y-2)-wallcenter[1])**2)) <= 22:
+                canmove = 0
+                break
+        if canmove == 1:
+            self.y -= self.velocity
+            self.direction = 2
+    def moveBaixo(self,canmove):
+        if self.is_hunter == True and math.sqrt((((self.x+(self.largura/2))-(Centro.x+(Centro.largura/2)))**2) + (((self.y+self.altura+2)-(Centro.y+(Centro.altura/2)))**2)) <= 50:
+            canmove = 0
+        for wallcenter in Labirinto.wallcenters:
+            if math.sqrt((((self.x+(self.largura/2))-wallcenter[0])**2) + (((self.y+self.altura+2)-wallcenter[1])**2)) <= 22:
+                canmove = 0
+                break
+        if canmove == 1:
+            self.y += self.velocity
+            self.direction = 3
+        
     def move(self, dirn):
         self.current_sprite += 1
         if self.current_sprite > 28:
@@ -146,46 +188,15 @@ class Player():
         else:
             self.velocity = 1
         canmove = 1
+
         if dirn == 0:
-            if self.is_hunter == True and math.sqrt((((self.x+self.largura+2)-(Centro.x+(Centro.largura/2)))**2) + (((self.y+(self.altura/2))-(Centro.y+(Centro.altura/2)))**2)) <= 50:
-                canmove = 0
-            for wallcenter in Labirinto.wallcenters:
-                if math.sqrt((((self.x+self.largura+2)-wallcenter[0])**2) + (((self.y+(self.altura/2))-wallcenter[1])**2)) <= 22:
-                    canmove = 0
-                    break
-            if canmove == 1:
-                self.x += self.velocity
-                self.direction = 0
-        elif dirn == 1:
-            if self.is_hunter == True and math.sqrt((((self.x-2)-(Centro.x+(Centro.largura/2)))**2) + (((self.y+(self.altura/2))-(Centro.y+(Centro.altura/2)))**2)) <= 50:
-                canmove = 0
-            for wallcenter in Labirinto.wallcenters:
-                if math.sqrt((((self.x-2)-wallcenter[0])**2) + (((self.y+(self.altura/2))-wallcenter[1])**2)) <= 22:
-                    canmove = 0
-                    break
-            if canmove == 1:
-                self.x -= self.velocity
-                self.direction = 1
-        elif dirn == 2:
-            if self.is_hunter == True and math.sqrt((((self.x+(self.largura/2))-(Centro.x+(Centro.largura/2)))**2) + (((self.y-2)-(Centro.y+(Centro.altura/2)))**2)) <= 50:
-                canmove = 0
-            for wallcenter in Labirinto.wallcenters:
-                if math.sqrt((((self.x+(self.largura/2))-wallcenter[0])**2) + (((self.y-2)-wallcenter[1])**2)) <= 22:
-                    canmove = 0
-                    break
-            if canmove == 1:
-                self.y -= self.velocity
-                self.direction = 2
-        else:
-            if self.is_hunter == True and math.sqrt((((self.x+(self.largura/2))-(Centro.x+(Centro.largura/2)))**2) + (((self.y+self.altura+2)-(Centro.y+(Centro.altura/2)))**2)) <= 50:
-                canmove = 0
-            for wallcenter in Labirinto.wallcenters:
-                if math.sqrt((((self.x+(self.largura/2))-wallcenter[0])**2) + (((self.y+self.altura+2)-wallcenter[1])**2)) <= 22:
-                    canmove = 0
-                    break
-            if canmove == 1:
-                self.y += self.velocity
-                self.direction = 3
+            self.moveDireita(canmove)
+        elif dirn == 1: 
+            self.moveEsquerda(canmove)
+        elif dirn == 2: 
+            self.moveCima(canmove)
+        else: 
+            self.moveBaixo(canmove)
 
 posicao_inicial_player1_x = 40
 posicao_inicial_player1_y = 10
@@ -231,7 +242,7 @@ for i in range(6):
         Sounds.Musica('partida')
     elif i == 3:
         Sounds.Musica('partida2')
-    Labirinto = Maze(Gerador_Labirinto.GerarLabirinto(tamanho_labirinto_y, tamanho_labirinto_x))
+    Labirinto = Maze(Gerador_Labirinto.GerarAjustarPrintarLabirinto(tamanho_labirinto_y, tamanho_labirinto_x))
     if i != 0:
         window.blit(mudajogador, (0, 0))
         pygame.display.update()
